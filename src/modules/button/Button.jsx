@@ -4,6 +4,8 @@ import without from 'lodash/without'
 import forEach from 'lodash/forEach'
 
 export default class Button extends Component {
+
+  // スタイルはstateで管理します。
   state = {
     classes: [
       'mdc-button',
@@ -12,6 +14,8 @@ export default class Button extends Component {
     rippleCss: {}
   }
 
+  // createAdapterでデフォルトのadapterを生成してから上書きします。
+  // デフォルトではCSSクラス名もDOMを直接書き換えるので、Reactに任せたい部分はここでリプレイスします。
   rippleFoundation = new MDCRippleFoundation(Object.assign(MDCRipple.createAdapter(this), {
     addClass: className => {
       this.setState(state => ({
@@ -43,6 +47,7 @@ export default class Button extends Component {
 
   componentDidMount() {
     if (this.props.ripple) {
+      // createAdapterで生成されたadapterは、デフォルトでinstance.root_を参照するのでバインドしておきます。
       this.root_ = this.refs.root
       this.rippleFoundation.init()
     }
@@ -50,6 +55,7 @@ export default class Button extends Component {
 
   componentDidUpdate() {
     if (this.refs.root) {
+      // アニメーションのスタイルはpropsを通して渡すと無視されてしまうので、直接DOMを操作します。
       forEach(this.state.rippleCss, (v, k) => {
         this.refs.root.style.setProperty(k, v)
       })
