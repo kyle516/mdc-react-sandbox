@@ -1,0 +1,24 @@
+{
+  "extends": "codetakt",
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "es6": true,
+  },
+  # "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "node_modules": "off",
+    "dist": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+  }
+}
