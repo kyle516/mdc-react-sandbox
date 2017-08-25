@@ -69,7 +69,7 @@ export default class Button extends Component {
   }
 
   render() {
-    const { children } = this.props
-    return <button ref="root" className={this.state.classes.join(' ')}>{children}</button>
+    const { ripple, className, ...rest } = this.props
+    return <button ref="root" className={this.state.classes.join(' ')} {...rest} />
   }
 }

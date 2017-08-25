@@ -1,9 +1,10 @@
 import React, { PureComponent as Component } from 'react'
+import { MDCRipple } from '@material/ripple'
 
 export default class LegacyButton extends Component {
   componentDidMount() {
     if (this.props.ripple) {
-      this.ripple = window.mdc.ripple.MDCRipple.attachTo(this.refs.root)
+      this.ripple = new MDCRipple(this.refs.root)
     }
   }
 
@@ -24,7 +25,7 @@ export default class LegacyButton extends Component {
   }
 
   render() {
-    const { children } = this.props
-    return <button ref="root" className={this.className}>{children}</button>
+    const { ripple, className, ...rest } = this.props
+    return <button ref="root" className={this.className} {...rest} />
   }
 }
