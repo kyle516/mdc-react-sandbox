@@ -1,5 +1,4 @@
 import React, { PureComponent as Component } from 'react'
-import { MDCTemporaryDrawer } from '@material/drawer'
 import { strings } from '@material/drawer/temporary/constants'
 
 
@@ -43,7 +42,7 @@ class Drawer extends Component {
   }
 
   init() {
-    this.drawer = new MDCTemporaryDrawer(this.refs.root)
+    this.drawer = window.mdc.drawer.MDCTemporaryDrawer.attachTo(this.refs.root)
     this.drawer.listen(strings.OPEN_EVENT, () => this.props.emit(true))
     this.drawer.listen(strings.CLOSE_EVENT, () => this.props.emit(false))
   }
